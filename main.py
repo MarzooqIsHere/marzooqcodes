@@ -30,7 +30,7 @@ async def on_member_join(member: discord.Member):
 
     file = discord.File(f"{member.display_name}.png", filename="image.png")
     embed = discord.Embed(title="Welcome to MarzooqCodes!", description="Please read the rules and open a ticket to discuss your next Discord bot or API with Marzooq!")
-    embed.set_author(name=member.display_name,icon_url=member.avatar_url)
+    embed.set_author(name=member.display_name,icon_url=member.avatar.url)
     embed.set_image(url="attachment://image.png")
 
     await welcomeChannel.send(content=member.mention,embed=embed,file=file)

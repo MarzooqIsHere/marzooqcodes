@@ -1,11 +1,14 @@
 from math import radians
 from PIL import Image, ImageDraw, ImageFont, ImageColor
 from io import BytesIO
+import requests
 
 async def createWelcomeCard(pfpURL, name):
 
     im = Image.open("assets/template.png")
-    data = BytesIO(pfpURL)
+
+    r = requests.get(pfpURL)
+    data = BytesIO(r.content)
     pfp = Image.open(data)
 
     maxwidth, maxheight = 750, 720
