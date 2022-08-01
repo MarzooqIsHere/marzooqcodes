@@ -7,6 +7,7 @@ from variables import guildIDs
 import random
 import dotenv
 import os
+import platform
 
 dotenv.load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -52,6 +53,46 @@ async def beforeLoop():
     await bot.wait_until_ready()
 
 updateMembers.start()
+
+@bot.slash_command(guild_ids=guildIDs)
+async def about(ctx: discord.ApplicationContext):
+
+    """View information about the bot."""
+
+    await ctx.defer()
+
+    author = ctx.author
+    marzooq = await bot.fetch_user(316288809216245762)
+
+    usercount = len(bot.users)
+
+    embed = discord.Embed(description="MarzooqCodes Bot is an open source bot used to manage the MarzooqCodes Discord Server. The code for it can be found below.")
+
+    embed.set_author(name=f"Bot Statistics", icon_url=bot.user.avatar.url)
+
+    embed.add_field(name="Bot",
+    value=f"""
+Name: **{bot.user.name}#{bot.user.discriminator}**
+ID: `{bot.user.id}`
+Bot Developer: {marzooq.mention}
+v2 Release Date: `31 July 2021`
+Github Repo: https://github.com/MarzooqIsHere/marzooqcodes
+    """,
+    inline=False)
+
+    embed.add_field(name="Stats",
+    value=f"""
+Servers: {len(bot.guilds)}
+Users: {usercount}
+Python Version: `{platform.python_version()}`
+Discord.py Version: `{discord.__version__}`
+Bot Latency: **{round(bot.latency*1000)}ms**
+    """,
+    inline=False)
+
+    embed.set_footer(text=f"Requested by {author.display_name}")
+    await ctx.respond(embed=embed)
+
 
 bot.load_extension("cogs.order")
 bot.load_extension("cogs.review")
