@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 import datetime
 from firebase import db
-from variables import guildIDs, ticketCategoryID
+from variables import guildIDs
 from discord.commands import Option
 
 class OrderModal(discord.ui.Modal):
@@ -22,7 +22,7 @@ class OrderModal(discord.ui.Modal):
 
         # Making the channel for the ticket
         
-        ticketCategory: discord.CategoryChannel = discord.utils.get(interaction.guild.categories, id=ticketCategoryID)
+        ticketCategory: discord.CategoryChannel = discord.utils.get(interaction.guild.categories, id=866027666955042836)
         ticket: discord.TextChannel = await ticketCategory.create_text_channel(name=f"order-for-{interaction.user.display_name}")
         
 

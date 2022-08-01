@@ -2,7 +2,7 @@ from discord.ext import commands
 import discord
 import datetime
 from firebase import db
-from variables import guildIDs, ticketCategoryID
+from variables import guildIDs
 from discord.commands import Option
 
 class Invites(commands.Cog):
